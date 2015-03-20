@@ -1,0 +1,15 @@
+#breadcrumbs.breadcrumbs
+  %ul.breadcrumb
+    %li
+      %i.icon-home.home-icon
+      = link_to @crumbs[0][0], @crumbs[0][1]
+      %span.divider
+        %i.icon-angle-right.arrow-icon
+    - @crumbs[1..@crumbs.size].each do |crumb|
+      %li
+        = link_to crumb[0], crumb[1]
+        %span.divider
+          %i.icon-angle-right.arrow-icon
+    %li.active aktuelle Seite
+  / .breadcrumb
+  // = render "layouts/members/search"

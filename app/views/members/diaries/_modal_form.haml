@@ -1,0 +1,37 @@
+= form_for ["members", DiaryEntry.new] do |f|
+  .form.form-inline
+    #modal-form.modal.hide{:tabindex => "-1"}
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"} &times;
+        %h4.blue.bigger Tagebucheintrag
+      .modal-body.overflow-visible
+        .row-fluid        
+          .span12
+            %h3 Datum            
+            %input#id-date-picker-1.date-picker{"data-date-format" => "dd-mm-yyyy", :type => "text", :name => "diary_entry[entry_date]"}/
+            %span.add-on
+              %i.icon-calendar
+            %h3 Gewicht
+            = f.text_field :weight
+            %h3 Essen
+            .input-append.bootstrap-timepicker
+              %input#timepicker1.input-small{:type => "text"}/
+              %span.add-on
+                %i.icon-time
+            %input.input-small{:placeholder => "Speisen", :type => "text"}
+            %input.input-small{:placeholder => "Getränke", :type => "text"}
+            %input.input-small{:placeholder => "Anmerkung", :type => "text"}
+            .space
+            %h3 Bewegung
+            %input.input-small{:placeholder => "Dauer", :type => "text"}
+            %input{:placeholder => "Art der körperlichen Aktivität", :type => "text"}
+            %input.input-small{:placeholder => "Anmerkung", :type => "text"}
+          .vspace        
+      .modal-footer
+        %button.btn.btn-small{"data-dismiss" => "modal"}
+          %i.icon-remove
+          Abbrechen
+        %button.btn.btn-small.btn-primary
+          %i.icon-ok
+          Speichern
+      

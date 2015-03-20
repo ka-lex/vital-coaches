@@ -1,0 +1,152 @@
+.navbar
+  .navbar-inner
+    .container-fluid
+      %a.brand{:href => "#{members_root_path}"}
+        %small
+          %i.icon-leaf
+          Vital Coaches
+      / /.brand
+      %ul.nav.ace-nav.pull-right
+        %li.grey
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %i.icon-tasks
+            %span.badge.badge-grey 4
+          %ul.pull-right.dropdown-navbar.dropdown-menu.dropdown-caret.dropdown-closer
+            %li.nav-header
+              %i.icon-ok
+              4 Aufgaben zu erledigen
+            %li
+              %a{:href => "#"}
+              .clearfix
+                %span.pull-left Trinken
+                %span.pull-right 65%
+              .progress.progress-mini
+                .bar{:style => "width:65%"}
+            %li
+              %a{:href => "#"}
+              .clearfix
+                %span.pull-left Fitness
+                %span.pull-right 35%
+              .progress.progress-mini.progress-danger
+                .bar{:style => "width:35%"}
+            %li
+              %a{:href => "#"}
+              .clearfix
+                %span.pull-left Protokollieren
+                %span.pull-right 15%
+              .progress.progress-mini.progress-warning
+                .bar{:style => "width:15%"}
+            %li
+              %a{:href => "#"}
+              .clearfix
+                %span.pull-left Lektionen pauken
+                %span.pull-right 90%
+              .progress.progress-mini.progress-success.progress-striped.active
+                .bar{:style => "width:90%"}
+            %li
+              %a{:href => "#"}
+                hier gehts zur Aufgabenliste
+                %i.icon-arrow-right
+        %li.purple
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %i.icon-bell-alt.icon-animated-bell
+            %span.badge.badge-important 8
+          %ul.pull-right.dropdown-navbar.navbar-pink.dropdown-menu.dropdown-caret.dropdown-closer
+            %li.nav-header
+              %i.icon-warning-sign
+              8 Meldungen
+            %li
+              %a{:href => "#"}
+              .clearfix
+                %span.pull-left
+                  %i.btn.btn-mini.no-hover.btn-pink.icon-comment
+                  Neue Kommentare
+                %span.pull-right.badge.badge-info +12
+            %li
+              %a{:href => "#"}
+                %i.btn.btn-mini.btn-primary.icon-user
+                Edgar hat sich soeben eingeloggt...
+            %li
+              %a{:href => "#"}
+              .clearfix
+                %span.pull-left
+                  %i.btn.btn-mini.no-hover.btn-success.icon-shopping-cart
+                  neue Einkaufslisten
+                %span.pull-right.badge.badge-success +8
+            %li
+              %a{:href => "#"}
+              .clearfix
+                %span.pull-left
+                  %i.btn.btn-mini.no-hover.btn-info.icon-twitter
+                  neue Mitglieder
+                %span.pull-right.badge.badge-info +11
+            %li
+              %a{:href => "#"}
+                Alle Nachrichten ansehen
+                %i.icon-arrow-right
+        %li.green
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %i.icon-envelope.icon-animated-vertical
+            %span.badge.badge-success 5
+          %ul.pull-right.dropdown-navbar.dropdown-menu.dropdown-caret.dropdown-closer
+            %li.nav-header
+              %i.icon-envelope-alt
+              5 Nachrichten
+            %li
+              %a{:href => "#"}
+                %img.msg-photo{:alt => "Alex's Avatar", :src => "/assets/members/avatars/avatar.png"}/
+                %span.msg-body
+                  %span.msg-title
+                    %span.blue Alex:
+                    Hey, hab wieder ein Kilo abgenommen ...
+                  %span.msg-time
+                    %i.icon-time
+                    %span gerade eben
+            %li
+              %a{:href => "#"}
+                %img.msg-photo{:alt => "Susan's Avatar", :src => "/assets/members/avatars/avatar3.png"}/
+                %span.msg-body
+                  %span.msg-title
+                    %span.blue Edgar:
+                    Klasse, weiter so ...
+                  %span.msg-time
+                    %i.icon-time
+                    %span vor 20 Minuten
+            %li
+              %a{:href => "#"}
+                %img.msg-photo{:alt => "Bob's Avatar", :src => "/assets/members/avatars/avatar4.png"}/
+                %span.msg-body
+                  %span.msg-title
+                    %span.blue Bob:
+                    Nullam quis risus eget urna mollis ornare ...
+                  %span.msg-time
+                    %i.icon-time
+                    %span 3:15 pm
+            %li
+              %a{:href => "#"}
+                Alle Nachrichten anschauen
+                %i.icon-arrow-right
+        %li.light-blue
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            %img.nav-user-photo{:alt => "Jason's Photo", :src => "/assets/members/avatars/user.jpg"}/
+            %span.user-info
+              %small Hallo,
+              = current_user.firstname
+            %i.icon-caret-down
+          %ul.user-menu.pull-right.dropdown-menu.dropdown-yellow.dropdown-caret.dropdown-closer
+            %li
+              %a{:href => "#"}
+                %i.icon-cog
+                Einstellungen
+            %li
+              %a{:href => members_profile_path}
+                %i.icon-user
+                Profil
+            %li.divider
+            %li
+              = link_to sign_out_path do              
+                %i.icon-off
+                Logout
+      / /.ace-nav
+    / /.container-fluid
+  / /.navbar-inner

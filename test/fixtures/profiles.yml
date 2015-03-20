@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  body_height: 1
+  weight: 
+  weight: 
+  user: 
+  birthday: 2013-09-13
+  abdominal_measurement: 1
+  street: MyString
+  street_number: MyString
+  zipcode: 1
+  city: MyString
+  country: MyString
+  bank_name: MyString
+  bank_account: MyString
+  bank_code: MyString
+  bank_account_owner: MyString
+
+two:
+  body_height: 1
+  weight: 
+  weight: 
+  user: 
+  birthday: 2013-09-13
+  abdominal_measurement: 1
+  street: MyString
+  street_number: MyString
+  zipcode: 1
+  city: MyString
+  country: MyString
+  bank_name: MyString
+  bank_account: MyString
+  bank_code: MyString
+  bank_account_owner: MyString

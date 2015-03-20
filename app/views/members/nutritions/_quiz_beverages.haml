@@ -1,0 +1,36 @@
+%form
+  %h3 Quiz
+  .quiz
+    Schätze den Kaloriengehalte der folgenden Getränke:
+
+    %ul.thumbnails
+      %li.span5
+        .thumbnail
+          %h3 1 Flasche Cola
+          = image_tag "members/quizes/cola.png"
+          %p 
+            kcal
+            %input.input-small{:type => "text"}
+      %li.span5
+        .thumbnail
+          %h3 1 Flasche Wasser
+          = image_tag "members/quizes/wasser.png"
+          %p 
+            kcal
+            %input.input-small{:type => "text"}
+    %ul.thumbnails
+      %li.span5
+        .thumbnail
+          %h3 1 Fl. Cola Light
+          = image_tag "members/quizes/cola-light.png"
+          %p 
+            kcal
+            %input.input-small{:type => "text"}
+      %li.span5
+        .thumbnail
+          %h3 1 Flasche Saft
+          = image_tag "members/quizes/saft.png"
+          %p 
+            kcal
+            %input.input-small{:type => "text"}
+    %button.btn.btn-small Abschicken                

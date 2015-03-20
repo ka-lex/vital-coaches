@@ -1,0 +1,215 @@
+- content_for :page_specifc_css do
+  / page specific plugin styles
+  %link{:href => "/assets/members/jquery-ui-1.10.3.custom.min.css", :rel => "stylesheet"}/
+  %link{:href => "/assets/members/jquery.gritter.css", :rel => "stylesheet"}/
+  %link{:href => "/assets/members/select2.css", :rel => "stylesheet"}/
+  %link{:href => "/assets/members/bootstrap-editable.css", :rel => "stylesheet"}/
+  / fonts
+  %link{:href => "/assets/members/ace-fonts.css", :rel => "stylesheet"}/
+  / ace styles
+
+
+.page-content
+  .page-header.position-relative
+    %h1
+      Mein Profil
+      %small
+        %i.icon-double-angle-right
+        Einstellungen vornehmen
+  / /.page-header
+  .row-fluid
+    .span12
+      / PAGE CONTENT BEGINS              
+      .user-profile
+        #user-profile-3.user-profile.row-fluid
+          .offset1.span10            
+            .space
+            = form_for @user, :as => :user, :url => members_user_path, :html => {:class => "form-horizontal"} do |f|
+            
+              .tabbable
+                %ul.nav.nav-tabs.padding-16
+                  %li.active
+                    %a{"data-toggle" => "tab", :href => "#edit-basic"}
+                      %i.green.icon-edit.bigger-125
+                      mein Profil
+                  %li
+                    %a{"data-toggle" => "tab", :href => "#edit-settings"}
+                      %i.purple.icon-cog.bigger-125
+                      Einstellungen
+                  %li
+                    %a{"data-toggle" => "tab", :href => "#edit-password"}
+                      %i.blue.icon-key.bigger-125
+                      Passwort
+                .tab-content.profile-edit-tab-content
+                  #edit-basic.tab-pane.in.active
+                    %h4.header.blue.bolder.smaller Allgemein
+                    .row-fluid
+                      .span4
+                        %input{:type => "file"}/
+                      .vspace
+                      .span8
+                        .control-group
+                          %label.control-label{:for => "form-field-username"} Vorname
+                          .controls                                                        
+                            = f.text_field :firstname
+                        .control-group
+                          %label.control-label{:for => "form-field-first"} Nachname
+                          .controls
+                            = f.text_field :lastname
+                            
+                    %hr/
+                    .control-group
+                      %label.control-label{:for => "form-field-date"} Geburtstag
+                      .controls
+                        .input-append
+                          %input#form-field-date.input-small.date-picker{"data-date-format" => "dd-mm-yyyy", :placeholder => "dd-mm-yyyy", :type => "text", :name => "user[profile_attributes][birthday]", :value => l(@user.profile.birthday)}/
+                          %span.add-on
+                            %i.icon-calendar
+                    .control-group
+                      %label.control-label Geschlecht
+                      .controls
+                        .space-2
+                        %label.inline
+                          = f.radio_button :gender, "m"
+                          %span.lbl männlich
+                        \&nbsp; &nbsp; &nbsp;
+                        %label.inline
+                          = f.radio_button :gender, "w"                          
+                          %span.lbl weiblich
+                    .space
+                    %h4.header.blue.bolder.smaller Kontaktdetails
+                    .control-group
+                      %label.control-label{:for => "form-field-email"} E-Mail
+                      .controls
+                        %span.input-icon.input-icon-right
+                          = f.email_field :email, :id => "form-field-email"                          
+                          %i.icon-envelope
+                    = f.fields_for :profile do |profile|
+                      .control-group
+                        %label.control-label{:for => "form-field-website"} Straße, Hausnummer
+                        .controls
+                          %span.input-icon.input-icon-right
+                            = profile.text_field :street
+                            %i.icon-globe
+                          %span1
+                            = profile.text_field :street_number
+                      
+                      .control-group
+                        %label.control-label{:for => "form-field-phone"} Stadt
+                        .controls
+                          %span.input-icon.input-icon-right
+                            = profile.text_field :city                            
+                      .control-group
+                        %label.control-label{:for => "form-field-phone"} Land
+                        .controls
+                          %span.input-icon.input-icon-right
+                            = profile.text_field :country     
+                      .space
+                      
+                            
+                  #edit-settings.tab-pane
+                    .space-10
+                    %div
+                      %label.inline
+                        %input{:name => "form-field-checkbox", :type => "checkbox"}/
+                        %span.lbl Make my profile public
+                    .space-8
+                    %div
+                      %label.inline
+                        %input{:name => "form-field-checkbox", :type => "checkbox"}/
+                        %span.lbl Email me new updates
+                    .space-8
+                    %div
+                      %label.inline
+                        %input{:name => "form-field-checkbox", :type => "checkbox"}/
+                        %span.lbl Keep a history of my conversations
+                      %label.inline
+                        %span.space-2.block
+                        for
+                        %input.input-mini{:maxlength => "3", :type => "text"}/
+                        days
+                  #edit-password.tab-pane
+                    .space-10
+                    .control-group
+                      %label.control-label{:for => "form-field-pass1"} New Password
+                      .controls
+                        %input#form-field-pass1{:type => "password"}/
+                    .control-group
+                      %label.control-label{:for => "form-field-pass2"} Confirm Password
+                      .controls
+                        %input#form-field-pass2{:type => "password"}/
+              .form-actions
+                = button_tag(:class => "btn btn-info") do                  
+                  %i.icon-ok.bigger-110
+                  Save
+                
+                \&nbsp; &nbsp; &nbsp;
+                %button.btn{:type => "reset"}
+                  %i.icon-undo.bigger-110
+                  Reset
+          / /span
+        / /user-profile
+      / PAGE CONTENT ENDS
+
+- content_for :inline_scripts do          
+  /[if lte IE 8]
+    <script src="assets/js/excanvas.min.js"></script>
+  %script{:src => "/assets/members/jquery-ui-1.10.3.custom.min.js"}
+  %script{:src => "/assets/members/jquery.ui.touch-punch.min.js"}
+  %script{:src => "/assets/members/jquery.gritter.min.js"}
+  %script{:src => "/assets/members/bootbox.min.js"}
+  %script{:src => "/assets/members/jquery.slimscroll.min.js"}
+  %script{:src => "/assets/members/jquery.easy-pie-chart.min.js"}
+  %script{:src => "/assets/members/jquery.hotkeys.min.js"}
+  %script{:src => "/assets/members/bootstrap-wysiwyg.min.js"}
+  %script{:src => "/assets/members/select2.min.js"}
+  
+  %script{:src => "/assets/members/fuelux/fuelux.spinner.min.js"}
+  %script{:src => "/assets/members/x-editable/bootstrap-editable.min.js"}
+  %script{:src => "/assets/members/x-editable/ace-editable.min.js"}
+  %script{:src => "/assets/members/jquery.maskedinput.min.js"}
+  / ace scripts
+  %script{:src => "/assets/members/ace-elements.min.js"}
+  %script{:src => "/assets/members/ace.min.js"}
+  / inline scripts related to this page
+  :javascript
+    $(function() {
+
+      $('#form-field-date').datepicker({
+        language: "de"
+      });
+    
+    
+    	///////////////////////////////////////////
+    	$('#user-profile-3')
+    	.find('input[type=file]').ace_file_input({
+    		style:'well',
+    		btn_choose:'Avatar wählen',
+    		btn_change:null,
+    		no_icon:'icon-picture',
+    		thumbnail:'large',
+    		droppable:true,
+    		before_change: function(files, dropped) {
+    			var file = files[0];
+    			if(typeof file === "string") {//files is just a file name here (in browsers that don't support FileReader API)
+    				if(! (/\.(jpe?g|png|gif)$/i).test(file) ) return false;
+    			}
+    			else {//file is a File object
+    				var type = $.trim(file.type);
+    				if( ( type.length > 0 && ! (/^image\/(jpe?g|png|gif)$/i).test(type) )
+    						|| ( type.length == 0 && ! (/\.(jpe?g|png|gif)$/i).test(file.name) )//for android default browser!
+    					) return false;
+    
+    				if( file.size > 110000 ) {//~100Kb
+    					return false;
+    				}
+    			}
+    
+    			return true;
+    		}
+    	})
+    
+    
+    });
+
+    

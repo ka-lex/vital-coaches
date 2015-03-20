@@ -1,0 +1,67 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %title Willkommen bei Vital Coaches
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / basic styles
+    = stylesheet_link_tag "members/application"
+    = stylesheet_link_tag "members/bootstrap.min", "members/bootstrap-responsive.min", "members/font-awesome.min"
+    
+    /[if IE 7]
+      = stylesheet_link_tag "members/font-awesome-ie7.min"
+      
+    / page specific plugin styles
+    = yield :page_specifc_css
+    / fonts
+    = stylesheet_link_tag "members/ace-fonts"
+    
+    / ace styles
+    = stylesheet_link_tag "members/ace.min", "members/ace-responsive.min", "members/ace-skins.min"
+    
+    /[if lte IE 8]
+      = stylesheet_link_tag "members/ace-ie.min"
+    / inline styles related to this page
+  %body
+    = render "layouts/members/navbar"
+    .main-container.container-fluid
+      %a#menu-toggler.menu-toggler{:href => "#"}
+        %span.menu-text
+      = render "layouts/members/sidebar"
+      .main-content
+        = render "layouts/members/breadcrumbs"
+        .page-content
+          .row-fluid
+            .span12
+              / PAGE CONTENT BEGINS
+              = yield
+              / PAGE CONTENT ENDS
+            / /.span
+          / /.row-fluid
+        / /.page-content
+        
+      / /.main-content
+    / /.main-container
+    %a#btn-scroll-up.btn-scroll-up.btn.btn-small.btn-inverse{:href => "#"}
+      %i.icon-double-angle-up.icon-only.bigger-110
+    / basic scripts
+    / [if !IE]>
+    :javascript
+      window.jQuery || document.write("<script src='/assets/members/jquery-2.0.3.min.js'>"+"<"+"/script>");
+    / <![endif]
+    /[if IE]
+      <script type="text/javascript">
+      window.jQuery || document.write("<script src='/assets/members/jquery-1.10.2.min.js'>"+"<"+"/script>");
+      </script>
+    :javascript
+      if("ontouchend" in document) document.write("<script src='/assets/members/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    %script{:src => "/assets/members/bootstrap.min.js"}
+    / page specific plugin scripts
+    = yield :scripts
+    = render "layouts/google_analytics"
+    / ace scripts
+    %script{:src => "/assets/members/ace-elements.min.js"}
+    %script{:src => "/assets/members/ace.min.js"}
+    / inline scripts related to this page
+    = yield :inline_scripts

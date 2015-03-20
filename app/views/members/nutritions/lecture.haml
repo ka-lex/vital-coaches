@@ -1,0 +1,42 @@
+.row-fluid
+  .span6
+    %h1 
+      = "Ernährungscoaching: Lektion #{@lecture[:id]}"
+    %h2
+      = @lecture[:name]
+    %p.lead
+      = @lecture[:video_description]
+    %h3 Los geht's!
+.row-fluid
+  .span6
+    .widget-box
+      .widget-header.widget-header-flat
+        %h4 Lektion #{@lecture[:id]}
+      .widget-body
+        .widget-main
+          .row-fluid
+            .span6#playerframe
+              #player
+              %button.btn.btn-big{:id => "start-button"} Video starten
+
+          .row-fluid
+            .span8
+              = render :partial => "quiz"
+                    
+                    
+                
+
+- content_for :scripts do
+  %script{:src => "http://vjs.zencdn.net/4.1/video.js" }
+- content_for :page_specifc_css do
+  %link{:href => "http://vjs.zencdn.net/4.1/video-js.css", :rel => "stylesheet"}/
+- content_for :inline_scripts do
+  
+  :javascript
+    $(document).ready( function() {
+      / $(".quiz").hide();
+      / $("#start-button").hide();
+    });
+  = render :partial => "video_script", :locals => {:video => @lecture[:video_id]}
+  }
+    

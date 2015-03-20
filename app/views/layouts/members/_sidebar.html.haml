@@ -1,0 +1,87 @@
+#sidebar.sidebar
+  #sidebar-shortcuts.sidebar-shortcuts
+    #sidebar-shortcuts-large.sidebar-shortcuts-large
+      %button.btn.btn-small.btn-success
+        %i.icon-signal
+      %button.btn.btn-small.btn-info
+        %i.icon-pencil
+      %button.btn.btn-small.btn-warning
+        %i.icon-group
+      %button.btn.btn-small.btn-danger
+        %i.icon-cogs
+    #sidebar-shortcuts-mini.sidebar-shortcuts-mini
+      %span.btn.btn-success
+      %span.btn.btn-info
+      %span.btn.btn-warning
+      %span.btn.btn-danger
+  / #sidebar-shortcuts
+  %ul.nav.nav-list
+    = nav_list_elmement "Übersichtsseite", members_root_path, "icon-dashboard"
+    %li
+      %a.dropdown-toggle{:href => "#"}
+        %i.icon-desktop
+        %span.menu-text Videos
+        %span.badge.badge-primary 15
+        %b.arrow.icon-angle-down
+      %ul.submenu
+        = nav_list_elmement "Ernährungsvideos", members_videos_nutrition_path, "icon-double-angle-right"
+        = nav_list_elmement "Fitnessvideos", fitness_members_videos_path, "icon-double-angle-right"
+        = nav_list_elmement "Motivationsvideos", motivation_members_videos_path, "icon-double-angle-right"       
+    
+    = # nav_list_elmement "Rezepte", members_recipes_path, "icon-list-alt"   
+
+    %li
+      %a.dropdown-toggle{:href => "#"}
+        %i.icon-desktop
+        %span.menu-text meine Tagebücher
+        %span.badge.badge-primary
+        %b.arrow.icon-angle-down
+      %ul.submenu
+        = # nav_list_elmement "Ernährungs-Tagebuch", members_diary_path, "icon-edit"
+        = nav_list_elmement "Trainings-Tagebuch", members_workouts_path, "icon-edit"
+        = # nav_list_elmement "Gewichts-Tagebuch", members_diary_path, "icon-edit"
+
+
+    = nav_list_elmement "meine Bilder", members_pictures_path, "icon-picture"    
+    %li
+      %a.dropdown-toggle{:href => "#"}
+        %i.icon-tag
+        %span.menu-text Community
+        %b.arrow.icon-angle-down
+      %ul.submenu
+        %li
+          %a{:href => "profile.html"}
+            %i.icon-double-angle-right
+            Mitglieder
+        %li
+          %a{:href => "pricing.html"}
+            %i.icon-double-angle-right
+            Forum        
+    %li.open
+      %a.dropdown-toggle{:href => "#"}
+        %i.icon-file-alt
+        %span.menu-text
+          mein Profil
+          
+        %b.arrow.icon-angle-down
+      %ul.submenu
+        %li
+          = link_to members_profile_path do
+            %i.icon-double-angle-right
+            persönliche Daten
+        %li
+          %a{:href => "error-500.html"}
+            %i.icon-double-angle-right
+            Mitgliedschaft
+        %li
+          %a{:href => "grid.html"}
+            %i.icon-double-angle-right
+            Nachrichten
+            %span.badge 4
+        %li
+          %a{:href => "blank.html"}
+            %i.icon-double-angle-right
+            Coaches
+  / /.nav-list
+  #sidebar-collapse.sidebar-collapse
+    %i.icon-double-angle-left

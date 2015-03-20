@@ -1,0 +1,15 @@
+.container.home          
+.container
+  .row
+    .span12    
+      = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+        %h2 E-Mail-Bestätigung
+        %p Wenn die Bestätiungsmail noch nicht ankam kannst Du sie hier erneut anfordern. Schau auch im Spam-Ordner nach, ab und zu kann es passieren das sie dort landet.
+        = devise_error_messages!
+        - flash.each do |name, msg|
+          = content_tag :div, msg, :class => "text-error"
+
+        = f.label :email
+        = f.email_field :email, :autofocus => true
+
+        = f.submit "Mail senden", :class => "btn btn-large btn-landing"

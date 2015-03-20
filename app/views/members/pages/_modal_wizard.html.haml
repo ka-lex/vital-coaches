@@ -1,0 +1,177 @@
+%h4.lighter
+  %i.icon-hand-right.icon-animated-hand-pointer.blue
+  %a.pink{"data-toggle" => "modal", :href => "#modal-wizard"} Wizard Inside a Modal Box
+#modal-wizard.modal.hide
+  .modal-header{"data-target" => "#modal-step-contents"}
+    %ul.wizard-steps.clearfix
+      %li.active{"data-target" => "#modal-step1"}
+        %span.step 1
+        %span.title Persönliche Daten
+      %li{"data-target" => "#modal-step2"}
+        %span.step 2
+        %span.title Vorlieben
+      %li{"data-target" => "#modal-step3"}
+        %span.step 3
+        %span.title Adresse
+      %li{"data-target" => "#modal-step4"}
+        %span.step 4
+        %span.title Zahlungsinfos
+  #modal-step-contents.modal-body.step-content
+    #modal-step1.step-pane.active
+      .center
+        %h4.blue Step 1
+      %form#validation-form.form-horizontal{:method => "get"}
+        .control-group
+          %label.control-label{:for => "email"} Email Address:
+          .controls
+            .span12
+              %input#email.span6{:name => "email", :type => "email"}/
+        .control-group
+          %label.control-label{:for => "password"} Password:
+          .controls
+            .span12
+              %input#password.span4{:name => "password", :type => "password"}/
+        .control-group
+          %label.control-label{:for => "password2"} Confirm Password:
+          .controls
+            .span12
+              %input#password2.span4{:name => "password2", :type => "password"}/
+        .hr.hr-dotted
+        .control-group
+          %label.control-label{:for => "name"} Company Name:
+          .controls
+            %span.span12
+              %input#name.span6{:name => "name", :type => "text"}/
+        .control-group
+          %label.control-label{:for => "phone"} Phone Number:
+          .controls
+            .span3.input-prepend
+              %span.add-on
+                %i.icon-phone
+              %input#phone.span12{:name => "phone", :type => "tel"}/
+        .control-group
+          %label.control-label{:for => "url"} Company URL:
+          .controls
+            .span12
+              %input#url.span8{:name => "url", :type => "url"}/
+        .hr.hr-dotted
+        .control-group
+          %label.control-label Subscribe to
+          .controls
+            %span.span12
+              %label
+                %input{:name => "subscription", :type => "checkbox", :value => "1"}/
+                %span.lbl Latest news and announcements
+              %label
+                %input{:name => "subscription", :type => "checkbox", :value => "2"}/
+                %span.lbl Product offers and discounts
+        .control-group
+          %label.control-label Gender
+          .controls
+            %span.span12
+              %label.blue
+                %input{:name => "gender", :type => "radio", :value => "1"}/
+                %span.lbl Male
+              %label.blue
+                %input{:name => "gender", :type => "radio", :value => "2"}/
+                %span.lbl Female
+        .hr.hr-dotted
+        .control-group
+          %label.control-label{:for => "state"} State
+          .controls
+            %span.span12
+              %select#state.select2{"data-placeholder" => "Click to Choose...", :name => "state"}
+                %option{:value => ""}
+                %option{:value => "AL"} Alabama
+                %option{:value => "AK"} Alaska
+                %option{:value => "AZ"} Arizona
+                %option{:value => "AR"} Arkansas
+                %option{:value => "CA"} California
+                %option{:value => "CO"} Colorado
+                %option{:value => "CT"} Connecticut
+                %option{:value => "DE"} Delaware
+                %option{:value => "FL"} Florida
+                %option{:value => "GA"} Georgia
+                %option{:value => "HI"} Hawaii
+                %option{:value => "ID"} Idaho
+                %option{:value => "IL"} Illinois
+                %option{:value => "IN"} Indiana
+                %option{:value => "IA"} Iowa
+                %option{:value => "KS"} Kansas
+                %option{:value => "KY"} Kentucky
+                %option{:value => "LA"} Louisiana
+                %option{:value => "ME"} Maine
+                %option{:value => "MD"} Maryland
+                %option{:value => "MA"} Massachusetts
+                %option{:value => "MI"} Michigan
+                %option{:value => "MN"} Minnesota
+                %option{:value => "MS"} Mississippi
+                %option{:value => "MO"} Missouri
+                %option{:value => "MT"} Montana
+                %option{:value => "NE"} Nebraska
+                %option{:value => "NV"} Nevada
+                %option{:value => "NH"} New Hampshire
+                %option{:value => "NJ"} New Jersey
+                %option{:value => "NM"} New Mexico
+                %option{:value => "NY"} New York
+                %option{:value => "NC"} North Carolina
+                %option{:value => "ND"} North Dakota
+                %option{:value => "OH"} Ohio
+                %option{:value => "OK"} Oklahoma
+                %option{:value => "OR"} Oregon
+                %option{:value => "PA"} Pennsylvania
+                %option{:value => "RI"} Rhode Island
+                %option{:value => "SC"} South Carolina
+                %option{:value => "SD"} South Dakota
+                %option{:value => "TN"} Tennessee
+                %option{:value => "TX"} Texas
+                %option{:value => "UT"} Utah
+                %option{:value => "VT"} Vermont
+                %option{:value => "VA"} Virginia
+                %option{:value => "WA"} Washington
+                %option{:value => "WV"} West Virginia
+                %option{:value => "WI"} Wisconsin
+                %option{:value => "WY"} Wyoming
+        .control-group
+          %label.control-label{:for => "platform"} Platform
+          .controls
+            %span.span12
+              %select#platform.span3{:name => "platform"}
+                %option{:value => ""} ------------------
+                %option{:value => "linux"} Linux
+                %option{:value => "windows"} Windows
+                %option{:value => "mac"} Mac OS
+                %option{:value => "ios"} iOS
+                %option{:value => "android"} Android
+        .control-group
+          %label.control-label{:for => "comment"} Comment
+          .controls
+            %span.span12
+              %textarea#comment.span8{:name => "comment"}
+        .control-group
+          .controls
+            %span.span6
+              %label
+                %input#agree{:name => "agree", :type => "checkbox"}/
+                %span.lbl I accept the policy
+
+
+    #modal-step2.step-pane
+      .center
+        %h4.blue Step 2
+    #modal-step3.step-pane
+      .center
+        %h4.blue Step 3
+    #modal-step4.step-pane
+      .center
+        %h4.blue Step 4
+  .modal-footer.wizard-actions
+    %button.btn.btn-small.btn-prev
+      %i.icon-arrow-left
+      Prev
+    %button.btn.btn-success.btn-small.btn-next{"data-last" => "Absenden "}
+      Next
+      %i.icon-arrow-right.icon-on-right
+    %button.btn.btn-danger.btn-small.pull-left{"data-dismiss" => "modal"}
+      %i.icon-remove
+      Cancel

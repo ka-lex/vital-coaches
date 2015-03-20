@@ -1,0 +1,7 @@
+%p
+  = link_to lecture_members_videos_nutrition_path(:lecture_id => lecture_id), :class => "btn btn-app btn-primary radius-10" do
+    %i.icon-film
+    = lecture_name
+    %span.badge.badge-warning
+      = lecture_id
+  = "Lektion #{lecture_id}: #{lecture_description}"

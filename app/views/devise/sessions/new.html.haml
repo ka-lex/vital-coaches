@@ -1,0 +1,34 @@
+.container.home
+.container
+  .row
+    .span12      
+
+      = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:clas => "form-horizontal"}) do |f|
+        %h2 Einloggen
+        = devise_error_messages!
+        - flash.each do |name, msg|
+          = content_tag :div, msg, :class => "text-error"
+
+        .control-group
+          = f.label :email, :class => "control-label"
+          .controls
+            = f.email_field :email, :autofocus => true 
+
+        .control-group
+          = f.label :password, :class => "control-label"
+          .controls
+            = f.password_field :password
+        
+        .control-group
+          .controls
+            - if devise_mapping.rememberable?
+              = f.label :remember_me, :class => "control-label" do
+                = f.check_box :remember_me
+                eingeloggt bleiben
+              
+            = f.submit "einloggen", :class => "btn btn-large btn-landing"
+
+        = link_to "Passwort vergessen?", new_password_path(resource_name)
+        |
+        = link_to "Bestätigungmail nochmal senden?", new_confirmation_path(resource_name)
+      

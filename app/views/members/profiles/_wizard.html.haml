@@ -1,0 +1,491 @@
+- content_for :scripts do
+  %script{:src => "/assets/members/jquery-ui-1.10.3.custom.min.js" }
+  %script{:src => "/assets/members/jquery.ui.touch-punch.min.js" }  
+  %script{:src => "/assets/members/fuelux/fuelux.wizard.min.js"}
+  %script{:src => "/assets/members/jquery.validate.min.js"}
+  %script{:src => "/assets/members/additional-methods.min.js"}
+  %script{:src => "/assets/members/bootbox.min.js"}
+  %script{:src => "/assets/members/jquery.maskedinput.min.js"}
+  %script{:src => "/assets/members/select2.min.js"}
+- content_for :page_specifc_css do
+  %link{:href => "/assets/members/select2.css", :rel => "stylesheet"}/
+  %link{:href => "/assets/members/jquery-ui-1.10.3.custom.min.css", :rel => "stylesheet"}/
+.row-fluid
+  .span12
+    .widget-box
+      = form_for :profile, :as => :profile, :url => members_profile_path, :html => {:id => "registration-form"} do |f|
+        
+        = hidden_field_tag :email, current_user.email
+        = hidden_field_tag :auth_token, current_user.authentication_token
+        .widget-header.widget-header-blue.widget-header-flat
+          %h4.lighter Profil ergänzen
+        .widget-body
+          .widget-main
+            .row-fluid
+              #fuelux-wizard.row-fluid.hide{"data-target" => "#step-container"}
+                %ul.wizard-steps
+                  %li.active{"data-target" => "#step1"}
+                    %span.step 1
+                    %span.title Maße
+                  %li{"data-target" => "#step2"}
+                    %span.step 2
+                    %span.title Gewohnheiten
+                  %li{"data-target" => "#step3"}
+                    %span.step 3
+                    %span.title Adresse
+                  %li{"data-target" => "#step4"}
+                    %span.step 4
+                    %span.title Zahlungsdetails
+              %hr/
+              #step-container.step-content.row-fluid.position-relative
+                #step1.step-pane.active
+                  %h3.lighter.block.green Gib Deine Daten an
+                  #validation-form.form-horizontal
+                    .control-group
+                      %label.control-label{:for => "body_height"} Körpergröße:
+                      .controls
+                        .span4
+                          = f.text_field :body_height, :id => "size", :class => "span3"
+                          cm
+                        .span8
+                          #slider-size
+                    .control-group
+                      %label.control-label{:for => "weight"} Gewicht:
+                      .controls
+                        .span12
+                          .span4
+                            = f.text_field :weight, :class => "span3", :id => "weight"
+                            kg
+                          .span8
+                            #slider-weight
+                    .control-group
+                      %label.control-label{:for => "abdominal"} Bauchumfang:
+                      .controls.form-inline                  
+                        .span4
+                          = f.text_field :abdominal_measurement, :id => "abdominal", :class => "span3"
+                          
+                          cm
+                        .span8
+                          #slider-abdominal
+                    .control-group
+                      %label.control-label{:for => "name"} Geburtstag:
+                      .controls.form-inline
+                        %span2
+                          %label{:for => "form-field-select-1"} Tag
+                          %select{:id => "form-field-select-1"}
+                            %option{:value => ""}
+                            - ("01".."31").each do |day|
+                              %option{:value => day}
+                                = day                            
+                        %span5
+                          %label{:for => "form-field-select-1"} Monat
+                          %select{:id => "form-field-select-1"}
+                            %option{:value => ""}
+                            - months = {1 => "Januar", 2 => "Februar",3 => "März", 4 => "April", 5 => "Mai", 6 => "Juni", 7 => "Juli", 8 => "August", 9 => "September",10 => "Oktober", 11 => "November", 12 => "Dezember"} 
+                            - months.keys.each do |key|
+                              %option{:value => key}
+                                = months[key]                            
+                        %span5
+                          %label{:for => "form-field-select-1"} Jahr
+                          %select{:id => "form-field-select-1"}
+                            %option{:value => ""}
+                            - (Time.now.year.downto(1900)).to_a.each do |year|
+                              %option{:value => year}
+                                = year
+                            
+                    .hr.hr-dotted
+                    
+                #step2.step-pane
+                  %h3.lighter.block.green Essgewohnheiten
+                  #validation-form.form-horizontal
+                    .control-group
+                      %label
+                        Hast Du bereits in der Vergangenheit Diäten gemacht?
+                      .controls
+                        %span.span12
+                          %label.blue
+                            = f.radio_button :already_did_diets, "yes"
+                            %span.lbl Ja
+                          %label.blue
+                            = f.radio_button :already_did_diets, "no"
+                            %span.lbl Nein
+                    .control-group
+                      %label
+                        Wieviel Obst und/oder Gemüse isst Du pro Woche
+                      .controls
+                        %span.span12
+                          %label.blue
+                            = f.radio_button :fruits_frequency, "one_portion_per_week"
+                            %span.lbl max 1 Portion pro Woche
+                          %label.blue
+                            = f.radio_button :fruits_frequency, "up_to_3_portions_per_week"
+                            %span.lbl 2-3 Portionen pro Woche
+                          %label.blue
+                            = f.radio_button :fruits_frequency, "daily"
+                            %span.lbl täglich Gemüse oder Obst
+                    .control-group
+                      %label
+                        wie oft isst Du FastFood oder Fertigprodukte pro Woche? wie sieht es mit FastFood (Burger, aber genauso auch Döner oder Bäckerei-Sachen) oder Fertiggerichten aus?
+                      .controls
+                        %span.span12
+                          %label.blue
+                            = f.radio_button :fastfood_frequency, "once_a_week"
+                            %span.lbl max 1 Mal pro Woche
+                          %label.blue
+                            = f.radio_button :fastfood_frequency, "twice_a_week"
+                            %span.lbl 2-3 Mal pro Woche
+                          %label.blue
+                            = f.radio_button :fastfood_frequency, "daily"
+                            %span.lbl täglich
+                    .control-group
+                      %label
+                        wie oft in der Woche isst Du Süßigkeiten oder Knabbersnacks?
+                      .controls
+                        %span.span12
+                          %label.blue
+                            = f.radio_button :snacks_frequency, "once_a_week"
+                            %span.lbl max 1 Mal pro Woche
+                          %label.blue
+                            = f.radio_button :snacks_frequency, "twice_a_week"
+                            %span.lbl 2-3 Mal pro Woche
+                          %label.blue
+                            = f.radio_button :snacks_frequency, "daily"
+                            %span.lbl täglich
+                    .control-group
+                      %label
+                        kochst Du öfter selbst oder lässt Du lieber kochen (Essen gehen, holen)?
+                      .controls
+                        %span.span12
+                          %label.blue
+                            = f.radio_button :cooking, "self-cooker"
+                            %span.lbl Selbst-Kocher
+                          %label.blue
+                            = f.radio_button :cooking, "go_out_for_lunch"
+                            %span.lbl Essen-Geher
+                    %h3.lighter.block.green Aktivität
+                    .control-group
+                      %label.control-label{:for => "email"} wie schätzt Du Deine körperliche Aktivität ein?
+                      .controls
+                        %span.span12
+                          %label.blue
+                            = f.radio_button :personal_activity, "1"
+                            %span.lbl hauptsächlich sitzende Tätigkeit
+                          %label.blue
+                            = f.radio_button :personal_activity, "2"
+                            %span.lbl ich bin teils handwerklich tätig oder laufe ab und zu
+                          %label.blue
+                            = f.radio_button :personal_activity, "3"
+                            %span.lbl harte körperliche Arbeit ist an der Tagesordnung
+                      
+                            
+                    .control-group
+                      %label.control-label{:for => "email"} Wie oft machst Du Sport?
+                      .controls
+                        %span.span12
+                          %label.blue
+                            = f.radio_button :sports_frequency, "1"
+                            %span.lbl ich mache kein Sport (Coachpotato)
+                          %label.blue
+                            = f.radio_button :sports_frequency, "2"
+                            %span.lbl mindestens einmal im Monat (Gelegenheits-Sporti)
+                          %label.blue
+                            = f.radio_button :sports_frequency, "3"
+                            %span.lbl mindestens einmal in der Woche (Weekly-Sportler)
+                          %label.blue
+                            = f.radio_button :sports_frequency, "4"
+                            %span.lbl regelmäßig, mehrmals die Woche (Sporty Spice)                      
+                    %h3.lighter.block.green Deine Ziele
+                    .control-group
+                      %label.control-label{:for => "email"} Was willst Du in den kommenden Wochen und Monaten erreichen?
+                      .controls
+                        %span.span12
+                          %label.blue
+                            = f.radio_button :target, "loose_weight"
+                            %span.lbl Körpergewicht verlieren
+                          %label.blue
+                            = f.radio_button :target, "gain_muscles"
+                            %span.lbl Muskelmasse aufbauen
+                          %label.blue
+                            = f.radio_button :target, "stay_the_same"
+                            %span.lbl Gewicht bzw. Muskeln beibehalten
+                      
+
+                #step3.step-pane
+                  .center
+                    %h3.blue.lighter Deine Rechnungsanschrift
+                  #validation-form.form-horizontal
+                    .control-group
+                      %label.control-label{:for => "email"} Straße:
+                      .controls
+                        .span12
+                          = f.text_field :street, :class => "span6"                          
+                    .control-group
+                      %label.control-label{:for => "email"} Hausnummer:
+                      .controls
+                        .span12
+                          = f.text_field :street_number, :class => "span6"
+                    .control-group
+                      %label.control-label{:for => "email"} Postleitzahl:
+                      .controls
+                        .span12
+                          = f.text_field :zipcode, :class => "span6"
+                    .control-group
+                      %label.control-label{:for => "email"} Ort:
+                      .controls
+                        .span12
+                          = f.text_field :city, :class => "span6"
+                    .control-group
+                      %label.control-label{:for => "email"} Land:
+                      .controls
+                        .span12
+                          = f.text_field :country, :class => "span6"
+                #step4.step-pane
+                  .center
+                    %h3.green Deine Kontoverbindung                  
+                  .control-group
+                    %label.control-label{:for => "email"} Kontonummer:
+                    .controls
+                      .span12
+                        = f.text_field :bank_account, :class => "span6"
+                  .control-group
+                    %label.control-label{:for => "email"} Bankleitzahl:
+                    .controls
+                      .span12
+                        = f.text_field :bank_code, :class => "span6"
+                  .control-group
+                    %label.control-label{:for => "email"} Kontoinhaber:
+                    .controls
+                      .span12
+                        = f.text_field :bank_account_owner, :class => "span6"
+
+              %hr/
+              .row-fluid.wizard-actions
+                %button.btn.btn-prev
+                  %i.icon-arrow-left
+                  zurück
+                %button.btn.btn-success.btn-next{"data-last" => "kostenpflichtig bestellen "}
+                  nächster Schritt
+                  %i.icon-arrow-right.icon-on-right
+        //%input{:tpye => "submit", :value => "los gehts"}          
+        / /widget-main
+        / /widget-body
+
+/ PAGE CONTENT ENDS
+- content_for :inline_scripts do
+  :javascript
+    $(function() {
+      $("#slider-size").css({width:'90%', 'float':'left', margin:'15px'}).slider({
+          range: "max",
+          min: 100,
+          max: 250,
+          value: 18,
+          slide: function(event, ui) {
+            $("#size").val( ui.value);
+          }
+      });
+      $("#slider-weight").css({width:'90%', 'float':'left', margin:'15px'}).slider({
+        range: "max",
+        min: 40,
+        max: 200,
+        value: 50,
+        slide: function(event, ui) {
+          $("#weight").val( ui.value);
+        }
+      });
+      $("#slider-abdominal").css({width:'90%', 'float':'left', margin:'15px'}).slider({
+        range: "max",
+        min: 40,
+        max: 200,
+        value: 60,
+        slide: function(event, ui) {
+          $("#abdominal").val( ui.value);
+        }
+      });
+    
+      $('[data-rel=tooltip]').tooltip();
+    
+      $(".select2").css('width','150px').select2({allowClear:true}).on('change', function(){
+        $(this).closest('form').validate().element($(this));
+      }); 
+    
+    
+      var $validation = false;
+      var $which_step = 0;
+      $('#fuelux-wizard').ace_wizard().on('change' , function(e, info){
+        console.log("fuelux wizard step: " + info.step);
+        if(info.step == 1 ) {
+          // do not submit form
+          //return false;
+        }
+        $which_step = info.step;
+
+        if(info.step == 1 && $validation) {
+          //if(!$('#validation-form').valid()) return false;            
+        }
+      }).on('finished', function(e) {
+        $which_step = 4;      
+        console.log("finished function");
+
+        var $form = $("#registration-form"), 
+          url = $form.attr('action');
+
+        console.log("action url:" + url);
+        console.log($form);
+        console.log($("form").attr('action'));
+
+        var result = $.post( url, $form.serialize() );
+
+        $("#validation-form").submit();
+        $("#registration-form").submit();
+        bootbox.dialog("Vielen Dank, Deine Daten wurden erfolgreich gespeichert.", [{
+          "label" : "OK",
+          "class" : "btn-small btn-primary",
+          }]
+        );
+      }).on('stepclick', function(e){
+        //return false;//prevent clicking on steps
+      });
+    
+    
+      //$('#validation-form').hide();
+      $('#skip-validation').removeAttr('checked').on('click', function(){
+        $validation = this.checked;
+        if(this.checked) {
+          $('#sample-form').hide();
+          $('#validation-form').show();
+        }
+        else {
+          $('#validation-form').hide();
+          $('#sample-form').show();
+        }
+      });
+    
+    
+    
+      //documentation : http://docs.jquery.com/Plugins/Validation/validate
+    
+    
+      $.mask.definitions['~']='[+-]';
+      $('#phone').mask('(999) 999-9999');
+    
+      jQuery.validator.addMethod("phone", function (value, element) {
+        return this.optional(element) || /^\(\d{3}\) \d{3}\-\d{4}( x\d{1,6})?$/.test(value);
+      }, "Enter a valid phone number.");
+    
+      $('#registration-form').validate({
+       submitHandler: function (form) {
+          //alert("form submit");
+          console.log("validator: " + $which_step);
+          if($which_step == 4) {
+            $which_step = 0
+            $("#registration-form").submit();
+            //return true;
+          }          
+          //$("#validation-form").submit();
+          //return true;
+        },
+        invalidHandler: function (form) {
+        }
+      });
+
+      $('#validation-form').validate({
+        errorElement: 'span',
+        errorClass: 'help-inline',
+        focusInvalid: false,
+        rules: {
+          email: {
+            required: true,
+            email:true
+          },
+          password: {
+            required: true,
+            minlength: 5
+          },
+          password2: {
+            required: true,
+            minlength: 5,
+            equalTo: "#password"
+          },
+          name: {
+            required: true
+          },
+          phone: {
+            required: true,
+            phone: 'required'
+          },
+          url: {
+            required: true,
+            url: true
+          },
+          comment: {
+            required: true
+          },
+          state: {
+            required: true
+          },
+          platform: {
+            required: true
+          },
+          subscription: {
+            required: true
+          },
+          gender: 'required',
+          agree: 'required'
+        },
+    
+        messages: {
+          email: {
+            required: "Please provide a valid email.",
+            email: "Please provide a valid email."
+          },
+          password: {
+            required: "Please specify a password.",
+            minlength: "Please specify a secure password."
+          },
+          subscription: "Please choose at least one option",
+          gender: "Please choose gender",
+          agree: "Please accept our policy"
+        },
+    
+        invalidHandler: function (event, validator) { //display error alert on form submit   
+          $('.alert-error', $('.login-form')).show();
+        },
+    
+        highlight: function (e) {
+          $(e).closest('.control-group').removeClass('info').addClass('error');
+        },
+    
+        success: function (e) {
+          $(e).closest('.control-group').removeClass('error').addClass('info');
+          $(e).remove();
+        },
+    
+        errorPlacement: function (error, element) {
+          if(element.is(':checkbox') || element.is(':radio')) {
+            var controls = element.closest('.controls');
+            if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+            else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+          }
+          else if(element.is('.select2')) {
+            error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+          }
+          else if(element.is('.chzn-select')) {
+            error.insertAfter(element.siblings('[class*="chzn-container"]:eq(0)'));
+          }
+          else error.insertAfter(element);
+        },
+    
+        submitHandler: function (form) {
+          //alert("form submit");
+          $("#registration-form").submit();
+        },
+        invalidHandler: function (form) {
+        }
+      });
+    
+      
+      
+      
+      $('#modal-wizard .modal-header').ace_wizard();
+      $('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
+    })

@@ -1,0 +1,41 @@
+%form
+  %h3 Quiz
+  .quiz
+    JoJo-Effekt
+
+    #answer1.draggable
+      %p Fett
+    #answer2.draggable
+      %p Wasser
+    #answer3.draggable
+      %p Muskelmaße
+
+
+    #answerbox1.dropable
+      %p Antwort 1
+    #answerbox2.dropable
+      %p Antwort 2
+    #answerbox3.dropable
+      %p Antwort 3
+
+- content_for :page_specifc_css do
+  :css
+    .draggable { width: 90px; height: 90px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+    .dropable { width: 120px; height: 120px; padding: 0.5em; float: left; margin: 10px; }
+- content_for :scripts do
+  %script{:src => "http://code.jquery.com/ui/1.10.3/jquery-ui.js"}
+- content_for :inline_scripts do
+  :javascript
+    $(document).ready( function() {
+      $(".draggable").draggable({ revert: "invalid" });
+      $( "#answerbox1" ).droppable({
+        accept: "#answer2",
+        activeClass: "ui-state-hover",
+        drop: function( event, ui ) {
+          $( this )
+            .addClass( "ui-state-highlight" )
+            .find( "p" )
+              .html( "Dropped!" );
+        }
+      });
+    });

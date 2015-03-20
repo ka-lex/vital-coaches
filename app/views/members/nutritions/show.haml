@@ -1,0 +1,3 @@
+%h1 Videolektionen rund ums Thema Ernährung
+- @lecutures.each do |lecture|
+  = render :partial => "lecture_button", :locals => {:lecture_id => lecture[:id], :lecture_name => lecture[:name], :lecture_description => lecture[:description]}

@@ -1,0 +1,5 @@
+<p>Willkommen <%= @resource.firstname %> <%= @resource.lastname %></p>
+<p>Deine Anmeldung bei Vital-Coaches.de ist fast vollständig.</p>
+<p>Um Deine E-MAiladresse zu bestätigen bitte dem folgenden Link folgen:</p>
+
+<p><%= link_to 'meine E-Mailadresse bestätigen', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

@@ -1,0 +1,20 @@
+= form_for ["members", Workout.new] do |f|
+  .form.form-inline
+    #modal-form.modal.hide{:tabindex => "-1"}
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"} &times;
+        %h4.blue.bigger Workout anlegen
+      .modal-body.overflow-visible
+        .row-fluid        
+          .span12            
+            %h3 Titel
+            = f.text_field :title
+          .vspace        
+      .modal-footer
+        %button.btn.btn-small{"data-dismiss" => "modal"}
+          %i.icon-remove
+          Abbrechen
+        %button.btn.btn-small.btn-primary
+          %i.icon-ok
+          Speichern
+      
